@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela  de Estudantes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        body{background-color: rgb(206, 243, 243);}
+    
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 5px solid rgba(6, 2, 10, 0.925);
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        input[type="text"], input[type="number"], input[type="email"] {
+            padding: 5px;
+            width: 19%;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            padding: 8px 16px;
+            background-color: #020a03;
+            color: rgb(255, 255, 255);
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #28ad2e;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastro de Estudantes</h1>
+
+    <form id="formEstudante">
+        <label for="id">ID do Estudante:</label>
+        <input type="number" id="id" name="id" required>
+
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="gmail">Gmail:</label>
+        <input type="email" id="gmail" name="gmail" required>
+
+        <label for="telefone">Número de Telefone:</label>
+        <input type="text" id="telefone" name="telefone" required>
+
+        <label for="notas">Notas:</label>
+        <input type="number" id="notas" name="notas" required min="0" max="20">
+
+        <input type="submit" value="Adicionar Estudante">
+    </form>
+
+    <h2>Lista de Estudantes</h2>
+    <table id="tabelaEstudantes">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Gmail</th>
+                <th>Número de Telefone</th>
+                <th>Notas</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Os dados dos estudantes serão exibidos aqui -->
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('formEstudante').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Coletando os dados do formulário
+            const id = document.getElementById('id').value;
+            const nome = document.getElementById('nome').value;
+            const gmail = document.getElementById('gmail').value;
+            const telefone = document.getElementById('telefone').value;
+            const notas = document.getElementById('notas').value;
+
+            // Determinando se o estudante foi aprovado ou reprovado
+            const status = (notas >= 10) ? 'Aprovado' : 'Reprovado';
+
+            // Criando uma nova linha na tabela
+            const tabela = document.getElementById('tabelaEstudantes').getElementsByTagName('tbody')[0];
+            const novaLinha = tabela.insertRow();
+
+            novaLinha.insertCell(0).textContent = id;
+            novaLinha.insertCell(1).textContent = nome;
+            novaLinha.insertCell(2).textContent = gmail;
+            novaLinha.insertCell(3).textContent = telefone;
+            novaLinha.insertCell(4).textContent = notas;
+            novaLinha.insertCell(5).textContent = status;
+
+            // Limpando o formulário
+            document.getElementById('formEstudante').reset();
+        });
+    </script>
+</body>
+</html>
